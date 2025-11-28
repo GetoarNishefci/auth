@@ -1,20 +1,16 @@
-import {auth, signOut} from "@/auth"
-    
-    const SettingsPage = async () =>{
-        const session = await auth()
-        return(
-            <div>
-                {JSON.stringify(session)}
-                <form action={async()=>{
-                    "use server";
-                    await signOut()
-                }}>
-                    <button>
-                        Sign out
-                    </button>
-                </form>
-            </div>
-        )
-    }
+"use client";
 
-    export default SettingsPage
+import { signOut } from "next-auth/react";
+
+export default function SettingsPage({ session }: { session: any }) {
+  return (
+    <div>
+      {JSON.stringify(session)}
+      <button
+        onClick={() => signOut({ callbackUrl: "/auth/login" })}
+      >
+        Sign out
+      </button>
+    </div>
+  );
+}
