@@ -1,20 +1,18 @@
-import {auth, signOut} from "@/auth"
-    
-    const SettingsPage = async () =>{
-        const session = await auth()
-        return(
-            <div>
-                {JSON.stringify(session)}
-                <form action={async()=>{
-                    "use server";
-                    await signOut()
-                }}>
-                    <button>
-                        Sign out
-                    </button>
-                </form>
-            </div>
-        )
-    }
+import {auth} from "@/auth"
+import SettingsClient from "./components/SettingsClient";
+import SignOutButton from "./components/SignOut";
 
-    export default SettingsPage
+const SettingsPage = async () => {
+  const session = await auth();
+
+  return (
+    <div>
+      {JSON.stringify(session)}
+      <SignOutButton />
+
+      <SettingsClient />
+    </div>
+  );
+};
+
+export default SettingsPage;
